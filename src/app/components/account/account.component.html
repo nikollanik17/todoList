@@ -1,0 +1,121 @@
+<app-header></app-header>
+<section class="account height-top">
+  <div class="container">
+    <div class="account__content">
+      <h4 class="account__header fw-bolder py-4">Profile details</h4>
+      <div class="account__form-holder">
+        <div class="row mb-4">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Avatar</label
+          >
+          <div class="col-lg-8">
+            <img
+              src="../../../assets/blank.png"
+              alt="Avatar"
+              class="account__avatar"
+            />
+            <!-- <img
+              [attr.src]="avatarImage"
+              alt="Avatar"
+              class="account__avatar"
+            /> -->
+            <!-- <img
+              src="{{ avatarImage }}"
+              alt="Avatar"
+              class="account__avatar"
+              *ngIf="avatarImage"
+            />  
+						<label class="d-block fs-5 my-2">Choose new avatar</label>
+            <input
+              type="file"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              #avatar
+            />
+            <button
+              class="btn btn-primary d-block mt-3"
+              (click)="updateAvatar(avatar.value)"
+            >
+              Update avatar
+            </button> -->
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label class="col-lg-4 col-form-label required fw-bold fs-6"
+            >Email</label
+          >
+          <div class="col-lg-8">
+            <input
+              type="text"
+              class="form-control form-control-lg form-control-solid disabled"
+              value="{{ account.email }}"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="form">
+          <div class="row mb-4">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Full Name</label
+            >
+            <div class="col-lg-8">
+              <input
+                type="text"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Enter full name"
+                value="{{ account.name }}"
+                #name
+              />
+            </div>
+          </div>
+          <div class="row mb-4">
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"
+              >Age</label
+            >
+            <div class="col-lg-8">
+              <input
+                type="number"
+                class="form-control form-control-lg form-control-solid"
+                placeholder="Enter age"
+                value="{{ account.age }}"
+                #age
+              />
+            </div>
+          </div>
+          <button
+            class="btn btn-primary account__submit mb-3"
+            (click)="updateAccount(name.value, age.value)"
+            *ngIf="!loading"
+          >
+            Save Changes
+          </button>
+          <button
+            class="btn btn-primary account__submit loading-btn"
+            *ngIf="loading"
+          >
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </button>
+          <div
+            class="alert alert-danger text-center"
+            role="alert"
+            *ngIf="errorMessage"
+          >
+            {{ errorMessage }}
+          </div>
+          <div
+            class="alert alert-success text-center"
+            role="alert"
+            *ngIf="successMessage"
+          >
+            {{ successMessage }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

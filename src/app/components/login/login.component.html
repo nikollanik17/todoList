@@ -1,0 +1,44 @@
+<section
+  class="login height-top d-flex justify-content-center align-items-center"
+>
+  <div class="container">
+    <div class="login__content">
+      <div class="login__title">Login</div>
+      <div class="text-gray-400 fw-bold mb-4">
+        Don't have an account?
+        <a [routerLink]="['/register']" class="link-primary fw-bold">Sign up</a>
+      </div>
+      <div class="form">
+        <div class="input-group mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            aria-label="Email"
+            #email
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            aria-label="Password"
+            #password
+          />
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="message">
+          {{ message }}
+        </div>
+        <div class="input-group mb-3">
+          <button
+            (click)="login(email.value, password.value)"
+            class="btn btn-primary"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

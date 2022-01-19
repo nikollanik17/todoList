@@ -1,0 +1,79 @@
+<section
+  class="login height-top d-flex justify-content-center align-items-center"
+>
+  <div class="container">
+    <div class="login__content">
+      <div class="login__title">Register</div>
+      <div class="text-gray-400 fw-bold mb-4">
+        Already have an account?
+        <a [routerLink]="['/login']" class="link-primary fw-bold">Sign in</a>
+      </div>
+      <div class="form">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            aria-label="Name"
+            #name
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            aria-label="Email"
+            #email
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            aria-label="Password"
+            #password
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Repeat password"
+            aria-label="Repeat password"
+            #confirmPassword
+          />
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Age"
+            aria-label="Age"
+            #age
+          />
+        </div>
+        <div class="alert alert-danger" role="alert" *ngIf="message">
+          {{ message }}
+        </div>
+        <div class="input-group mb-3">
+          <button
+            class="btn btn-primary"
+            (click)="
+              register(
+                name.value,
+                email.value,
+                password.value,
+                confirmPassword.value,
+                age.value
+              )
+            "
+          >
+            Register
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

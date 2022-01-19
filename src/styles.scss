@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-gray-400 {
+  color: #b5b5c3 !important;
+}
+
+main {
+  margin-top: 100px;
+  min-height: calc(100vh - 100px);
+}
+
+.height-top {
+  min-height: calc(100vh - 100px);
+}
+
+.form-control {
+  &.form-control-solid {
+    background-color: #f5f8fa;
+    border-color: #f5f8fa;
+    color: #5e6278;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    padding: 0.825rem 1.5rem;
+    font-size: 1.15rem;
+    border-radius: 0.475rem;
+    outline: none;
+  }
+
+  &.disabled {
+    background: #dddddd;
+    color: #7c7c7c;
+    filter: blur(0.5px);
+  }
+}
+
+.col-form-label {
+  color: #3f4254;
+  line-height: 1.5;
+  padding-top: calc(0.75rem + 1px);
+  padding-bottom: calc(0.75rem + 1px);
+  margin-bottom: 0;
+}

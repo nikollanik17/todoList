@@ -1,0 +1,35 @@
+<header class="header">
+  <a [routerLink]="['/']" class="header__logo">
+    <img src="../assets/icons/logo.svg" alt="Logo" />
+  </a>
+  <div class="header__acc" (click)="handleAccountClick()">
+    <img
+      src="../assets/blank.png"
+      alt="Avatar"
+      class="header__acc__avatar-top"
+    />
+  </div>
+  <div class="header__acc-dropdown">
+    <div class="header__acc-dropdown__top">
+      <img src="../assets/blank.png" alt="Avatar" />
+      <div>
+        <h3>{{ account.name }}</h3>
+        <p class="text-gray-400">{{ account.email }}</p>
+      </div>
+    </div>
+    <div class="header__acc-dropdown__links">
+      <a
+        [routerLink]="['/account']"
+        (click)="handleAccountClick()"
+        class="header__acc-dropdown__link text-gray-400"
+        >My Profile</a
+      >
+      <div
+        (click)="handleLogout()"
+        class="header__acc-dropdown__link text-gray-400"
+      >
+        Logout
+      </div>
+    </div>
+  </div>
+</header>

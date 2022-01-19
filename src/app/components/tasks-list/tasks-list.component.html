@@ -1,0 +1,81 @@
+<app-header></app-header>
+<section class="tasks height-top">
+  <div class="container">
+    <div class="tasks__title mb-5">All tasks</div>
+    <div class="tasks__content">
+      <div class="tasks__sort">
+        <div class="tasks__sort__heading">Sort:</div>
+        <select
+          class="form-select form-select-solid form-select-lg fs-6"
+          (change)="handleSelectChange($event)"
+        >
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="not-completed">Not Completed</option>
+        </select>
+      </div>
+      <div *ngIf="!loading">
+        <div class="tasks__list">
+          <div
+            class="alert alert-success text-center"
+            role="alert"
+            *ngIf="successMessage"
+          >
+            {{ successMessage }}
+          </div>
+          <app-task
+            *ngFor="let task of tasks | filterPipe: filterValue; index as i"
+            [task]="task"
+          >
+          </app-task>
+        </div>
+        <div class="tasks__add-new" (click)="toggleModal()">
+          <img src="../../../assets/icons/add-icon.svg" />
+        </div>
+      </div>
+      <div *ngIf="loading">
+        <app-loader></app-loader>
+      </div>
+    </div>
+  </div>
+  <div
+    class="task-list-modal{{ addModalVisible ? ' active' : '' }}"
+    (click)="toggleModal()"
+  >
+    <div class="task-list-modal__content" (click)="preventClose($event)">
+      <div class="task-list-modal__close" (click)="toggleModal()">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="task-list-modal__icon"><i class="fas fa-tasks"></i></div>
+      <div class="mb-4 fs-4">Add new task</div>
+      <div class="input-group mb-3">
+        <textarea
+          type="email"
+          class="form-control"
+          placeholder="Enter task description"
+          aria-label="Task"
+          rows="5"
+          #description
+        ></textarea>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+      <button
+        class="btn btn-success"
+        (click)="addTask(description)"
+        *ngIf="!loading"
+      >
+        Add
+      </button>
+      <button class="btn btn-success loading-btn" *ngIf="loading">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </button>
+    </div>
+  </div>
+</section>
