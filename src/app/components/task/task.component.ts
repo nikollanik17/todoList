@@ -13,6 +13,9 @@ export class TaskComponent implements OnInit {
   @Input() task: Task;
   dayjs: any = dayjs;
   deleteModalActive: boolean = false;
+  editModalActive: boolean = false;
+  loading: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     public taskService: TaskService,
@@ -21,21 +24,40 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  updateTask() {
+  updateTask(newDescription: string, isDescUpdate: boolean) {
     this.tasksList.loading = true;
+    this.loading = true;
+    if (isDescUpdate && newDescription === '') {
+      this.updateTaskError();
+      return;
+    }
     this.taskService.updateTask(
       this.task._id,
-      !this.task.completed,
+      isDescUpdate ? this.task.completed : !this.task.completed,
+      isDescUpdate ? newDescription : this.task.description,
       () => this.updateTaskSuccess(),
-      () => (this.tasksList.loading = false)
+      () => this.updateTaskError()
     );
   }
 
   updateTaskSuccess() {
     this.tasksList.getTasks();
+    this.loading = false;
+    this.errorMessage = '';
+    this.editModalActive = false;
     this.tasksList.successMessage = 'Task successfully updated!';
     setTimeout(() => {
       this.tasksList.successMessage = '';
+    }, 4000);
+  }
+
+  updateTaskError() {
+    this.loading = false;
+    this.tasksList.loading = false;
+    this.tasksList.successMessage = '';
+    this.errorMessage = 'Error updating, description is required!';
+    setTimeout(() => {
+      this.errorMessage = '';
     }, 4000);
   }
 
@@ -66,5 +88,9 @@ export class TaskComponent implements OnInit {
 
   preventClose(e: Event) {
     e.stopPropagation();
+  }
+
+  toggleModal() {
+    this.editModalActive = !this.editModalActive;
   }
 }

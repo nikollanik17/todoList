@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,7 +19,8 @@ export class AccountComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
   ) {
     this.successMessage = '';
     this.errorMessage = '';
@@ -28,11 +30,11 @@ export class AccountComponent implements OnInit {
     this.errorMessage = '';
     this.successMessage = '';
     this.account = this.authService.getUser();
-    this.authService.getAvatar((blob: any) => {
-      this.image = blob;
-      this.avatarImage = this.sanitizer.bypassSecurityTrustUrl(this.image);
-      console.log(this.avatarImage);
-    });
+    // this.authService.getAvatar((blob: any) => {
+    //   this.image = blob;
+    //   this.avatarImage = this.sanitizer.bypassSecurityTrustUrl(this.image);
+    //   console.log(this.avatarImage);
+    // });
   }
 
   updateAccount(name: string, age: string) {
@@ -66,5 +68,10 @@ export class AccountComponent implements OnInit {
     setTimeout(() => {
       this.errorMessage = '';
     }, 3000);
+  }
+
+  public handleLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

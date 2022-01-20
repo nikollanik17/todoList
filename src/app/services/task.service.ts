@@ -21,11 +21,12 @@ export class TaskService {
   updateTask(
     id: string,
     completed: boolean,
+    description: string,
     successCallback: Function,
     errorCallback: Function
   ): void {
     axios
-      .put(`task/${id}`, { completed })
+      .put(`task/${id}`, { completed, description })
       .then((response) => {
         successCallback();
       })
