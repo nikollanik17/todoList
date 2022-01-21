@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import axios from '../config/axios';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class TaskService {
-  constructor() {}
-
   getTasks(successCallback: Function, errorCallback: Function): void {
     axios
       .get('task')

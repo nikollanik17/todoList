@@ -1,0 +1,52 @@
+<app-header></app-header>
+<section class="height-top">
+  <div class="container">
+    <div *ngIf="!task">
+      <app-loader></app-loader>
+    </div>
+    <div *ngIf="task">
+      <div class="btn-holder">
+        <a [routerLink]="['/']" type="button" class="btn btn-secondary">
+          <i class="fas fa-arrow-left"></i>Back
+        </a>
+      </div>
+      <div class="single-task">
+        <div class="single-task__content">
+          <div class="single-task__icon"><i class="fas fa-tasks"></i></div>
+          <div class="mb-4 fs-4">Edit task</div>
+          <div class="input-group mb-3">
+            <textarea
+              class="form-control"
+              placeholder="Enter task description"
+              aria-label="Task"
+              value="{{ task.description }}"
+              rows="5"
+              #description
+            ></textarea>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="successMessage">
+            {{ successMessage }}
+          </div>
+          <button
+            class="btn btn-success"
+            (click)="updateTask(description.value)"
+            *ngIf="!loading"
+          >
+            Edit
+          </button>
+          <button class="btn btn-success loading-btn" *ngIf="loading">
+            <div class="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

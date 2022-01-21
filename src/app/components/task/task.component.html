@@ -1,7 +1,7 @@
 <div class="task-wrapper">
   <div class="task completed-{{ task.completed }} mb-3">
     <div class="task__info">
-      <div class="task__completed" (click)="updateTask('', false)">
+      <div class="task__completed" (click)="updateTask()">
         <div *ngIf="task.completed; then thenBlock; else elseBlock"></div>
         <ng-template #thenBlock>
           <img src="../../../assets/icons/checked.svg" />
@@ -16,7 +16,7 @@
       <div class="task__date">
         {{ dayjs(task.updatedAt).format("DD. MMM.") }}
       </div>
-      <div class="task__edit-btn" (click)="toggleModal()" title="Edit task">
+      <div class="task__edit-btn" (click)="handleEditClick()" title="Edit task">
         <i class="fas fa-pencil-alt"></i>
       </div>
       <div
@@ -29,47 +29,6 @@
     </div>
   </div>
 </div>
-<div
-  class="task-edit-modal{{ editModalActive ? ' active' : '' }}"
-  (click)="toggleModal()"
->
-  <div class="task-edit-modal__content" (click)="preventClose($event)">
-    <div class="task-edit-modal__close" (click)="toggleModal()">
-      <i class="fas fa-times"></i>
-    </div>
-    <div class="task-edit-modal__icon"><i class="fas fa-tasks"></i></div>
-    <div class="mb-4 fs-4">Edit task</div>
-    <div class="input-group mb-3">
-      <textarea
-        class="form-control"
-        placeholder="Enter task description"
-        aria-label="Task"
-        value="{{ task.description }}"
-        rows="5"
-        #description
-      ></textarea>
-    </div>
-    <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
-      {{ errorMessage }}
-    </div>
-    <button
-      class="btn btn-success"
-      *ngIf="!loading"
-      (click)="updateTask(description.value, true)"
-    >
-      Edit
-    </button>
-    <button class="btn btn-success loading-btn" *ngIf="loading">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </button>
-  </div>
-</div>
-
 <div
   class="task-delete{{ deleteModalActive ? ' active' : '' }}"
   (click)="handleModalClose()"

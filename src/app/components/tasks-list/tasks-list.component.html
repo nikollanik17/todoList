@@ -28,6 +28,9 @@
             [task]="task"
           >
           </app-task>
+          <div class="tasks__no-tasks fs-5" *ngIf="tasks?.length === 0">
+            No tasks added, add one on button below
+          </div>
         </div>
         <div class="tasks__add-new" (click)="toggleModal()">
           <img src="../../../assets/icons/add-icon.svg" />

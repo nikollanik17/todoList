@@ -3,6 +3,7 @@ import { TaskService } from 'src/app/services/task.service';
 import { Task } from '../../models/task.model';
 import { TasksListComponent } from '../tasks-list/tasks-list.component';
 import * as dayjs from 'dayjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -19,22 +20,19 @@ export class TaskComponent implements OnInit {
 
   constructor(
     public taskService: TaskService,
-    public tasksList: TasksListComponent
+    public tasksList: TasksListComponent,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
 
-  updateTask(newDescription: string, isDescUpdate: boolean) {
+  updateTask() {
     this.tasksList.loading = true;
     this.loading = true;
-    if (isDescUpdate && newDescription === '') {
-      this.updateTaskError();
-      return;
-    }
     this.taskService.updateTask(
       this.task._id,
-      isDescUpdate ? this.task.completed : !this.task.completed,
-      isDescUpdate ? newDescription : this.task.description,
+      !this.task.completed,
+      this.task.description,
       () => this.updateTaskSuccess(),
       () => this.updateTaskError()
     );
@@ -90,7 +88,8 @@ export class TaskComponent implements OnInit {
     e.stopPropagation();
   }
 
-  toggleModal() {
-    this.editModalActive = !this.editModalActive;
+  handleEditClick() {
+    let id = this.task._id;
+    this.router.navigate(['/task', id]);
   }
 }
