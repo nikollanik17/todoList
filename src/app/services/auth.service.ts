@@ -81,6 +81,16 @@ export class AuthService {
       });
   }
 
+  deleteAccount(): void {
+    axios
+      .delete('user/me')
+      .then((response) => {
+        this.logout();
+        this.router.navigate(['/login']);
+      })
+      .catch((err) => {});
+  }
+
   logout(): any {
     localStorage.clear();
   }

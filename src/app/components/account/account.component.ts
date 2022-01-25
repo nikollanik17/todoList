@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit {
   errorMessage: string;
   successMessage: string;
   loading: boolean = false;
+  deleteModalActive: boolean = false;
 
   constructor(
     public authService: AuthService,
@@ -73,5 +74,21 @@ export class AccountComponent implements OnInit {
   public handleLogout() {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  handleModalOpen() {
+    this.deleteModalActive = true;
+  }
+
+  handleModalClose() {
+    this.deleteModalActive = false;
+  }
+
+  handleDelete() {
+    this.authService.deleteAccount();
+  }
+
+  preventClose(e: Event) {
+    e.stopPropagation();
   }
 }

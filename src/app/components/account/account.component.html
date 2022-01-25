@@ -105,7 +105,30 @@
             {{ successMessage }}
           </div>
         </div>
+        <hr />
+        <button
+          class="btn btn-danger account__delete mb-3"
+          (click)="handleModalOpen()"
+        >
+          Delete account
+        </button>
       </div>
     </div>
   </div>
 </section>
+
+<div
+  class="account-delete{{ deleteModalActive ? ' active' : '' }}"
+  (click)="handleModalClose()"
+>
+  <div class="account-delete__content" (click)="preventClose($event)">
+    <div class="account-delete__icon"><i class="fas fa-trash-alt"></i></div>
+    <div class="account-delete__text">
+      Are you sure you want to delete your account?
+    </div>
+    <div class="account-delete__buttons">
+      <div class="btn btn-light" (click)="handleModalClose()">No</div>
+      <button class="btn btn-danger" (click)="handleDelete()">Yes</button>
+    </div>
+  </div>
+</div>
